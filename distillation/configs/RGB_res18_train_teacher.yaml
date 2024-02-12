@@ -1,0 +1,36 @@
+cfg_name: RGB_res18_baseline
+modality: RGB
+dir_data: '../SN6'
+dir_img: 'PS-RGB_1orient'
+dir_gt: 'mask_1orient'
+dir_edge: 'edge_mask_1orient'
+train_file: 'train2613_y.txt'
+test_file: 'test788_y.txt'
+
+model:
+  name: BIDNet
+  with_edge: True
+  model_cfg:
+    encoder_name: resnet18
+    with_grad: True
+  pre_model: False
+
+max_epoch: 25
+batchsize: 4
+lr: 1.0e-3
+weight_decay: 1.0e-6
+
+lr_policy:
+  name: StepLR
+  step_size: 15
+  gamma: 0.5
+
+loss_functions:
+  - BCEWithLogitsLoss
+loss_weights:
+  - 1.0 
+
+
+
+
+
