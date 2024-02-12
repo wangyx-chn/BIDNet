@@ -1,0 +1,71 @@
+cfg_name: dist_res18_hed
+modality: SAR
+dir_data: '../SN6'
+dir_img: 'SAR-PRO_1orient'
+dir_gt: 'mask_1orient'
+dir_edge: 'SAR-PRO_1orient_edge/hed2'
+dir_edgegt: 'edge_mask_1orient'
+train_file: 'train2613_y.txt'
+test_file: 'test788_y.txt'
+
+
+model:
+  name: BIDNet
+  with_edge: True
+  model_cfg:
+    encoder_name: resnet18
+    with_grad: True
+  pre_model: False
+
+dist_cfg:
+  - name: encoder_4
+    dir: "../SN6/orifeat_RGB/resnet18/Dexined/encoder_4"
+    loss: MSELoss
+    weight: 1.0
+  - name: edge_4
+    dir: "../SN6/orifeat_RGB/resnet18/Dexined/edge_4"
+    loss: KLLoss
+    weight: 1.0
+  - name: edge_3
+    dir: "../SN6/orifeat_RGB/resnet18/Dexined/edge_3"
+    loss: KLLoss
+    weight: 1.0
+  - name: edge_2
+    dir: "../SN6/orifeat_RGB/resnet18/Dexined/edge_2"
+    loss: KLLoss
+    weight: 1.0
+  - name: edge_1
+    dir: "../SN6/orifeat_RGB/resnet18/Dexined/edge_1"
+    loss: KLLoss
+    weight: 1.0
+  - name: edge_0
+    dir: "../SN6/orifeat_RGB/resnet18/Dexined/edge_0"
+    loss: KLLoss
+    weight: 1.0
+  - name: decoder
+    dir: "../SN6/orifeat_RGB/resnet18/Dexined/decoder"
+    loss: StructLoss
+    func: MSELoss
+    weight: 1.0
+
+max_epoch: 30
+batchsize: 4
+lr: 1.0e-3
+weight_decay: 5.0e-6
+
+lr_policy:
+  name: StepLR
+  step_size: 12
+  gamma: 0.5
+
+loss_functions:
+  - BCEWithLogitsLoss
+  - BCEWithLogitsLoss
+loss_weights:
+  - 1.0 
+  - 1.0
+
+
+
+
+

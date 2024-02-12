@@ -1,0 +1,37 @@
+cfg_name: RGB_res18_baseline_test
+modality: RGB
+dir_data: '../SN6'
+dir_img: 'PS-RGB_1orient'
+dir_gt: 'mask_1orient'
+dir_edge: 'edge_mask_1orient'
+train_file: 'train.txt'
+test_file: 'test.txt'
+
+
+model:
+  name: DeepLabV3plus
+  with_edge: False
+  model_cfg:
+    encoder_name: resnet18
+    with_grad: False
+  model_weight: ../BIDNet_r18.pth
+
+prob_thr: 0.5
+evaluate: False
+
+ori_features: False
+vis_features: False
+
+features:
+- encoder_features
+- decoder_features
+
+featuremap_mode: ave
+ 
+ 
+
+
+
+
+
+
